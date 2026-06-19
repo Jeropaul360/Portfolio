@@ -22,11 +22,11 @@ body {
   --primary-color: #297afc;
   --secondary-color: #3B82F6;
   --bg-primary: #ffffff;
-  --text-color: #222222;
+  --text-color: #000000;
   --text-color-two: #ffffff;
   --bg-secondary: #000000;
   --card-background: #f4f4f4;
-  --bg-secondary-two: #111111;
+  --bg-secondary-two: #000000;
 
   --shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 
@@ -118,6 +118,24 @@ body {
   width: 40px;
 }
 
+/* ==========================
+   Logo Glow
+========================== */
+
+#logo img{
+    width:40px;
+    transition:all .35s ease;
+    filter:drop-shadow(0 0 0 rgba(41,122,252,0));
+}
+
+#logo img:hover{
+    transform:scale(1.08);
+    filter:
+        drop-shadow(0 0 8px rgba(41,122,252,.8))
+        drop-shadow(0 0 20px rgba(41,122,252,.45))
+        drop-shadow(0 0 35px rgba(41,122,252,.25));
+}
+
 .navbar .btn {
   margin-right: 1.5rem;
 }
@@ -125,6 +143,28 @@ body {
 .fas.fa-arrow-right {
   margin-left: 0.5rem;
   font-size: 0.9rem;
+}
+
+/* ==========================
+   Button Glow
+========================== */
+
+.btn{
+    position:relative;
+    overflow:hidden;
+    transition:all .35s ease;
+    border:1px solid rgba(41,122,252,.3);
+}
+
+.btn:hover{
+    color:#fff;
+    background:#297afc;
+    border-color:#297afc;
+
+    box-shadow:
+        0 0 12px rgba(41,122,252,.55),
+        0 0 25px rgba(41,122,252,.35),
+        0 10px 30px rgba(41,122,252,.25);
 }
 
 /* hamburger */
@@ -174,119 +214,6 @@ body {
 }
 
 /* ==========================
-   Scroll To Top Button
-========================== */
-
-#scrollTopBtn{
-    position:fixed;
-    right:30px;
-    bottom:30px;
-    width:58px;
-    height:58px;
-
-    border:none;
-    outline:none;
-    border-radius:50%;
-
-    cursor:pointer;
-
-    background:linear-gradient(135deg,#297afc,#5ca7ff);
-    color:#fff;
-    font-size:20px;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    box-shadow:
-        0 12px 30px rgba(41,122,252,.35),
-        inset 0 1px 0 rgba(255,255,255,.25);
-
-    transition:
-        transform .35s ease,
-        opacity .35s ease,
-        background .35s ease,
-        box-shadow .35s ease;
-
-    opacity:0;
-    visibility:hidden;
-    transform:translateY(20px) scale(.85);
-    z-index:999;
-}
-
-/* Show Button */
-
-#scrollTopBtn.show{
-    opacity:1;
-    visibility:visible;
-    transform:translateY(0) scale(1);
-}
-
-/* Hover */
-
-#scrollTopBtn:hover{
-
-    transform:translateY(-8px) scale(1.08);
-
-    box-shadow:
-        0 18px 40px rgba(41,122,252,.55),
-        0 0 25px rgba(41,122,252,.35);
-
-}
-
-/* Click */
-
-#scrollTopBtn:active{
-    transform:scale(.92);
-}
-
-/* Icon Animation */
-
-#scrollTopBtn i{
-    transition:transform .3s ease;
-}
-
-#scrollTopBtn:hover i{
-    transform:translateY(-3px);
-}
-
-/* Floating Animation */
-
-@keyframes floatButton{
-
-    0%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-6px);
-    }
-
-    100%{
-        transform:translateY(0);
-    }
-
-}
-
-#scrollTopBtn.show{
-    animation:floatButton 2.8s ease-in-out infinite;
-}
-
-/* Mobile */
-
-@media(max-width:768px){
-
-    #scrollTopBtn{
-        width:52px;
-        height:52px;
-        right:20px;
-        bottom:20px;
-        font-size:18px;
-    }
-
-}
-
-/* ==========================
    Skills
 ========================== */
 
@@ -320,7 +247,6 @@ body {
     border-radius:18px;
 
     text-align:center;
-    cursor:pointer;
 
     transition:
         transform .45s ease,
@@ -1231,7 +1157,74 @@ body.dark-mode .project-card::after{
     }
 }
 
-/* Social Media */
+
+
+/* Scroll up */
+
+/* ===== THEME VARIABLES ===== */
+:root {
+  --btn-bg: #007bff;
+  --btn-color: #000000;      /* light theme icon = black */
+  --btn-hover-color: #ffffff;
+  --btn-glow: rgb(0, 123, 255);
+  --btn-glow-hover: rgba(0, 123, 255, 1);
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --btn-bg: #007bff;
+  --btn-color: #000000;      /* dark theme icon = white */
+  --btn-hover-color: #ffffff;
+  --btn-glow: rgba(255, 255, 255, 0.25);
+  --btn-glow-hover: rgba(0, 123, 255, 01);
+}
+
+/* ===== BUTTON STYLE ===== */
+.scroll-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 55px;
+  height: 55px;
+
+  background: var(--btn-bg);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 0 10px var(--btn-glow);
+
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+/* ICON */
+.scroll-top i {
+  color: var(--btn-color);
+  font-size: 20px;
+  transition: color 0.4s ease;
+}
+
+/* HOVER EFFECT */
+.scroll-top:hover {
+  box-shadow: 0 0 20px var(--btn-glow-hover);
+  transform: scale(1.1);
+}
+
+.scroll-top:hover i {
+  color: var(--btn-hover-color);
+}
+
+/* SHOW BUTTON */
+.scroll-top.show {
+  opacity: 1;
+  visibility: visible;
+}
 
 /* Social Icons */
 
@@ -1416,40 +1409,36 @@ body.dark-mode .project-card::after{
   }
 }
 
-/* Scroll To Top Button */
-
-#scrollTopBtn{
+#scrollUpBtn {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    right: 25px;
+    bottom: 25px;
+
     width: 55px;
     height: 55px;
-    border: none;
-    border-radius: 50%;
-    background: #297afc;
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(0,0,0,.25);
-    z-index: 9999;
 
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
+    border-radius: 50%;
+    text-decoration: none;
+
+    font-size: 22px;
+    font-weight: bold;
+
+    color: white;
+    background: linear-gradient(135deg, #297afc, #3B82F6);
+
+    box-shadow: 0 0 15px rgba(41, 122, 252, 0.6);
+    
     opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: .35s ease;
+    pointer-events: none;
+    transition: all 0.3s ease;
 }
 
-#scrollTopBtn:hover{
-    transform: translateY(-5px) scale(1.08);
-    background:#1b63db;
-}
-
-#scrollTopBtn.show{
-    opacity:1;
-    visibility:visible;
-    transform:translateY(0);
+/* Hover effect */
+#scrollUpBtn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 0 25px rgba(41, 122, 252, 0.9);
 }
