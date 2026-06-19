@@ -59,25 +59,25 @@ if (currentTheme) {
   }
 }
 
-const scrollTopBtn = document.getElementById("scrollTopBtn");
+// Scroll button
 
+const scrollBtn = document.getElementById("scrollTopBtn");
+
+// Show button when scrolling down
 window.addEventListener("scroll", () => {
-
-    if (window.scrollY > 300) {
-        scrollTopBtn.classList.add("show");
-    } else {
-        scrollTopBtn.classList.remove("show");
-    }
-
+  if (window.scrollY > 300) {
+    scrollBtn.classList.add("show");
+  } else {
+    scrollBtn.classList.remove("show");
+  }
 });
 
-scrollTopBtn.addEventListener("click", () => {
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
+// Scroll to top smoothly
+scrollBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 });
 
 //Adding date
