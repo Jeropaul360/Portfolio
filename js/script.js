@@ -1,88 +1,88 @@
+// ===== Mobile menu =====
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-menu");
 
-hamburger.addEventListener("click", mobileMenu);
+function closeMenu() {
+  hamburger?.classList.remove("active");
+  navMenu?.classList.remove("active");
+}
 
-function mobileMenu() {
+hamburger?.addEventListener("click", () => {
   hamburger.classList.toggle("active");
   navMenu.classList.toggle("active");
+});
+
+// Close navbar when a link is clicked
+document.querySelectorAll(".nav-link").forEach((link) => {
+  link.addEventListener("click", closeMenu);
+});
+
+// ===== Documents dropdown (+) =====
+const docDropdown = document.querySelector(".doc-dropdown");
+const docToggle = document.getElementById("docToggle");
+
+function setDocMenu(open) {
+  docDropdown.classList.toggle("open", open);
+  docToggle.setAttribute("aria-expanded", String(open));
 }
 
-// Close navbar when link is clicked
-const navLink = document.querySelectorAll(".nav-link");
+if (docDropdown && docToggle) {
+  docToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    setDocMenu(!docDropdown.classList.contains("open"));
+  });
 
-navLink.forEach((n) => n.addEventListener("click", closeMenu));
+  // Close when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!docDropdown.contains(e.target)) setDocMenu(false);
+  });
 
-function closeMenu() {
-  hamburger.classList.remove("active");
-  navMenu.classList.remove("active");
+  // Close with Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setDocMenu(false);
+  });
+
+  // Close menus after choosing Resume / Cover Letter
+  docDropdown.querySelectorAll(".doc-menu a").forEach((link) => {
+    link.addEventListener("click", () => {
+      setDocMenu(false);
+      closeMenu();
+    });
+  });
 }
 
-// Event Listeners: Handling toggle event
-const toggleSwitch = document.querySelector(
-  '.theme-switch input[type="checkbox"]'
-);
+// ===== Theme toggle (saved between visits) =====
+const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  if (toggleSwitch) toggleSwitch.checked = theme === "dark";
+}
 
 function switchTheme(e) {
-  if (e.target.checked) {
-    document.documentElement.setAttribute("data-theme", "dark");
-  } else {
-    document.documentElement.setAttribute("data-theme", "light");
-  }
+  const theme = e.target.checked ? "dark" : "light";
+  applyTheme(theme);
+  localStorage.setItem("theme", theme);
 }
 
-toggleSwitch.addEventListener("change", switchTheme, false);
+toggleSwitch?.addEventListener("change", switchTheme);
 
-//  Store color theme for future visits
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) applyTheme(savedTheme);
 
-function switchTheme(e) {
-  if (e.target.checked) {
-    document.documentElement.setAttribute("data-theme", "dark");
-    localStorage.setItem("theme", "dark"); //add this
-  } else {
-    document.documentElement.setAttribute("data-theme", "light");
-    localStorage.setItem("theme", "light"); //add this
-  }
-}
-
-// Save user preference on load
-
-const currentTheme = localStorage.getItem("theme")
-  ? localStorage.getItem("theme")
-  : null;
-
-if (currentTheme) {
-  document.documentElement.setAttribute("data-theme", currentTheme);
-
-  if (currentTheme === "dark") {
-    toggleSwitch.checked = true;
-  }
-}
-
-// Scroll button
-
+// ===== Scroll to top =====
 const scrollBtn = document.getElementById("scrollTopBtn");
 
-// Show button when scrolling down
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 300) {
-    scrollBtn.classList.add("show");
-  } else {
-    scrollBtn.classList.remove("show");
-  }
-});
-
-// Scroll to top smoothly
-scrollBtn.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+if (scrollBtn) {
+  window.addEventListener("scroll", () => {
+    scrollBtn.classList.toggle("show", window.scrollY > 300);
   });
-});
 
-//Adding date
+  scrollBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
 
-let myDate = document.querySelector("#datee");
-
-const yes = new Date().getFullYear();
-myDate.innerHTML = yes;
+// ===== Footer year =====
+const yearEl = document.querySelector("#datee");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
