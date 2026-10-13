@@ -20,11 +20,11 @@ A responsive personal portfolio website that showcases my projects, skills, cert
 
 1. Clone the repository
 ```bash
-   git clone https://github.com/your-username/your-repo-name.git
+   git clone https://github.com/Jeropaul360/Portfolio.git
 ```
 2. Open the project folder
 ```bash
-   cd your-repo-name
+   cd portfolio
 ```
 3. Open `index.html` in your browser, or use a local server like Live Server in VS Code.
 
