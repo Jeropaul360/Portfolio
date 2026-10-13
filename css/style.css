@@ -15,7 +15,7 @@
   --card-background: #f4f4f4;
   --bg-secondary-two: #000000;
   --card-border: rgba(41, 122, 252, 0.08);
-  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.06); /* softened so it fades out before the edge */
   --shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 
   --btn-bg: #007bff;
@@ -152,7 +152,7 @@ section, #contact { scroll-margin-top: 90px; }
 /* Buttons glow */
 .btn {
   position: relative;
-  overflow: hidden;
+  /* removed overflow-x: auto (it forced overflow-y: auto and could clip the glow) */
   transition: all 0.35s ease;
   border: 1px solid rgba(41, 122, 252, 0.3);
 }
@@ -287,7 +287,7 @@ section, #contact { scroll-margin-top: 90px; }
 .experience-card,
 .project-card {
   position: relative;
-  overflow: hidden;
+  overflow: hidden; /* was overflow-x: auto; keeps image zoom inside rounded corners */
   background: var(--card-background);
   border: 1px solid var(--card-border);
   border-radius: 18px;
@@ -358,7 +358,6 @@ section, #contact { scroll-margin-top: 90px; }
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 30px;
-  margin-top: 50px;
 }
 
 .skill-card {
@@ -487,7 +486,14 @@ section, #contact { scroll-margin-top: 90px; }
   grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
   align-items: stretch;
   gap: 35px;
-  margin-top: 50px;
+}
+
+/* Give card shadows + hover lift room inside the grids so they never get clipped.
+   Padding adds the space, negative margin cancels it so layout doesn't shift. */
+.skills-grid,
+.projects-grid {
+  padding: 20px 0 70px;
+  margin: 30px 0 -20px;
 }
 
 .project-card:nth-child(2) { animation-delay: 0.2s; }
