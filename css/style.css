@@ -139,14 +139,6 @@ section, #contact { scroll-margin-top: 90px; }
   filter: drop-shadow(0 0 0 rgba(41, 122, 252, 0));
 }
 
-.navbar #logo img:hover {
-  transform: scale(1.08);
-  filter:
-    drop-shadow(0 0 8px rgba(41, 122, 252, 0.8))
-    drop-shadow(0 0 20px rgba(41, 122, 252, 0.45))
-    drop-shadow(0 0 35px rgba(41, 122, 252, 0.25));
-}
-
 .navbar .btn { margin-right: 1.5rem; }
 
 /* Buttons glow */
